@@ -28,20 +28,20 @@ This project implements a simple math module exporting an `add` function, with u
 Matrix_Build_Demo/
 ├── .github/
 │   └── workflows/
-│       └── matrix-build.yml  # GitHub Actions workflow configuration
+│       └── matrix-build-pipeline.yml  # GitHub Actions workflow configuration
 ├── tests/
-│   └── add.test.js           # Unit tests
-├── index.js                  # Core source code (add function)
-├── package.json              # Project dependencies & scripts
-├── README.md                 # Project documentation
-└── .gitignore                # Git ignored files
+│   └── add.test.js                 # Unit tests
+├── index.js                        # Core source code (add function)
+├── package.json                    # Project dependencies & scripts
+├── README.md                       # Project documentation
+└── .gitignore                      # Git ignored files
 ```
 
 ---
 
 ## ⚙️ GitHub Actions Matrix Configuration
 
-The workflow is defined in [.github/workflows/matrix-build.yml](.github/workflows/matrix-build.yml). It triggers automatically on:
+The workflow is defined in [.github/workflows/matrix-build-pipeline.yml](.github/workflows/matrix-build-pipeline.yml). It triggers automatically on:
 - `push` events to the `main` branch.
 - `pull_request` events to the `main` branch.
 
@@ -49,11 +49,13 @@ The workflow is defined in [.github/workflows/matrix-build.yml](.github/workflow
 
 | Dimension | Target Environments / Versions |
 | :--- | :--- |
-| **Operating Systems** | `ubuntu-latest`, `windows-latest`, `macos-latest` |
+| **Operating Systems** | `ubuntu-latest`, `windows-latest`, `macos-13` |
 | **Node.js Versions** | `18`, `20`, `22` |
 
 > [!NOTE]
-> This 3x3 matrix configures a total of **9 parallel jobs** executing simultaneously on GitHub hosted runners to verify compatibility.
+> This workflow also automatically sets up and installs **Docker** on all 3 operating systems using `docker/setup-docker-action`.
+> 
+> *Note: We use `macos-13` (Intel) rather than `macos-latest` (ARM64) because GitHub-hosted ARM64 macOS runners do not support the nested virtualization required to spin up the Docker daemon.*
 
 ---
 

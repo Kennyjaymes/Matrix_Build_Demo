@@ -1,4 +1,4 @@
-name: Matrix Build
+name: Matrix Build Pipeline
 
 on:
   push:
@@ -19,7 +19,7 @@ jobs:
         os:
           - ubuntu-latest
           - windows-latest
-          - macos-latest
+          - macos-13
 
         node-version:
           - 18
@@ -29,6 +29,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Set up Docker
+        uses: docker/setup-docker-action@v4
+
+      - name: Verify Docker
+        run: docker --version
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
