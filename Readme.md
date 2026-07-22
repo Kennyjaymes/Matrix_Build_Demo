@@ -1,41 +1,88 @@
-# Matrix Build Demo
+# 🧪 Matrix Build Demo
 
-This is a simple demonstration project for testing GitHub Actions matrix builds.
+A demonstration project showcasing **GitHub Actions Matrix Builds**. This repository demonstrates how to test a Node.js application across multiple operating systems and Node.js runtime versions concurrently.
 
-## Overview
+---
 
-The project consists of a simple Node.js script exporting an `add` function, and it uses `jest` to run unit tests.
+## 📋 Table of Contents
+- [Overview](#-overview)
+- [Project Structure](#-project-structure)
+- [GitHub Actions Matrix Configuration](#-github-actions-matrix-configuration)
+- [Local Development](#-local-development)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Running Tests](#running-tests)
+- [License](#-license)
 
-The main purpose of this repository is to demonstrate how to configure and run a GitHub Actions workflow using a build matrix.
+---
 
-## GitHub Actions Matrix Build
+## 🔍 Overview
 
-The included workflow (`.github/workflows/matrix-build.yml`) runs tests automatically on pushes and pull requests to the `main` branch. 
+This project implements a simple math module exporting an `add` function, with unit tests powered by [Jest](https://jestjs.io/). The core focus is demonstrating GitHub Actions workflows running across multiple operating systems and Node.js versions (9 total environment combinations) to guarantee cross-compatibility.
 
-It is configured to run across a matrix of multiple Operating Systems and Node.js versions:
+---
 
-**Operating Systems:**
-- `ubuntu-latest`
-- `windows-latest`
-- `macos-latest`
+## 📁 Project Structure
 
-**Node.js Versions:**
-- `18`
-- `20`
-- `22`
+```text
+Matrix_Build_Demo/
+├── .github/
+│   └── workflows/
+│       └── matrix-build.yml  # GitHub Actions workflow configuration
+├── tests/
+│   └── add.test.js           # Unit tests
+├── index.js                  # Core source code (add function)
+├── package.json              # Project dependencies & scripts
+├── README.md                 # Project documentation
+└── .gitignore                # Git ignored files
+```
 
-This ensures that the code functions correctly across 9 different environment combinations.
+---
 
-## Running Tests Locally
+## ⚙️ GitHub Actions Matrix Configuration
 
-To run the tests locally, make sure you have Node.js installed.
+The workflow is defined in [.github/workflows/matrix-build.yml](.github/workflows/matrix-build.yml). It triggers automatically on:
+- `push` events to the `main` branch.
+- `pull_request` events to the `main` branch.
 
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
+### Matrix Parameters
 
-2. Run the tests:
-   ```bash
-   npm test
-   ```
+| Dimension | Target Environments / Versions |
+| :--- | :--- |
+| **Operating Systems** | `ubuntu-latest`, `windows-latest`, `macos-latest` |
+| **Node.js Versions** | `18`, `20`, `22` |
+
+> [!NOTE]
+> This 3x3 matrix configures a total of **9 parallel jobs** executing simultaneously on GitHub hosted runners to verify compatibility.
+
+---
+
+## 💻 Local Development
+
+### Prerequisites
+
+Before running locally, ensure you have the following installed:
+- [Node.js](https://nodejs.org/) (Version 18 or higher recommended)
+- npm (comes bundled with Node.js)
+
+### Installation
+
+Clone the repository and install the developer dependencies:
+
+```bash
+npm install
+```
+
+### Running Tests
+
+Execute the Jest test suite:
+
+```bash
+npm test
+```
+
+---
+
+## 📄 License
+
+This project is licensed under the [ISC License](https://opensource.org/licenses/ISC).
